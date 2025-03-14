@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
-    ? "https://reading-community-7nysljzmy-kais-projects-d7c5b07e.vercel.app"
+    ? "reading-community-mu.vercel.app"
     : "http://localhost:3000"
 }));
 
