@@ -8,9 +8,10 @@ import { Server } from 'socket.io';
 dotenv.config();
 const app = express();
 const server = http.createServer(app);
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 app.use(cors({
-    origin: "http://localhost:3000"
+    origin: process.env.NODE_ENV === 'production'
+        ? "https://reading-community-mu.vercel.app"
+        : "http://localhost:3000"
 }));
 app.use(express.json());
 mongoose.connect(process.env.MONGODB_URL)
@@ -18,9 +19,13 @@ mongoose.connect(process.env.MONGODB_URL)
     .catch(err => console.error('mongoose接続エラー', err));
 const PORT = process.env.PORT || 5003;
 const io = new Server(server, {
-    cors: { origin: "http://localhost:3000" }
+    cors: {
+        origin: process.env.NODE_ENV === 'production'
+            ? "https://reading-community-mu.vercel.app"
+            : "http://localhost:3000"
+    }
 });
-app.use('/channels', chatRouter(io));
+app.use('/api/channels', chatRouter(io));
 io.on("connection", (socket) => {
     console.log("クライアント接続しました");
     socket.on("disconnect", () => {

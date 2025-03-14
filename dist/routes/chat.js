@@ -28,10 +28,12 @@ const chatRouter = (io) => {
                 return;
             }
             const messages = channel.messages.map((msg) => {
+
+                const plainMsg = msg.toObject();
                 return {
-                    message: msg.message,
-                    user: msg.user,
-                    createdAt: msg.createdAt,
+                    message: plainMsg.message,
+                    user: plainMsg,
+                    createdAt: plainMsg.createdAt,
                 };
             });
             res.status(200).json({
