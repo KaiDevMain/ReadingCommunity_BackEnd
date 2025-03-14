@@ -26,7 +26,7 @@ const PORT = process.env.PORT || 5003;
 const io = new Server(server, {
     cors: {
       origin: process.env.NODE_ENV === 'production'
-        ? "https://reading-community-klo5zpwop-kais-projects-d7c5b07e.vercel.app"
+        ? "reading-community-mu.vercel.app"
         : "http://localhost:3000"
     }
   });
