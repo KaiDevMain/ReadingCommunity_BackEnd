@@ -11,8 +11,8 @@ const app = express();
 const server = http.createServer(app);
 
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production'
-    ? "https://reading-community-mu.vercel.app"
+  origin: process.env.NODE_ENV === 'production'
+    ? "https://reading-community-7nysljzmy-kais-projects-d7c5b07e.vercel.app"
     : "http://localhost:3000"
 }));
 
@@ -22,10 +22,11 @@ mongoose.connect(process.env.MONGODB_URL!)
 .catch(err =>console.error('mongoose接続エラー', err));
 
 const PORT = process.env.PORT || 5003;
+
 const io = new Server(server, {
     cors: {
       origin: process.env.NODE_ENV === 'production'
-        ? "https://reading-community-mu.vercel.app"
+        ? "https://reading-community-7nysljzmy-kais-projects-d7c5b07e.vercel.app"
         : "http://localhost:3000"
     }
   });
